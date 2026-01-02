@@ -8,7 +8,10 @@ import 'ui/screens/signup_screen.dart';
 import 'ui/screens/home_screen.dart';
 import 'ui/screens/history_screen.dart';
 import 'ui/screens/profile_screen.dart';
+import 'ui/screens/workout_screen.dart';
+import 'ui/screens/exercises_screen.dart';
 import 'ui/screens/scaffold_with_navbar.dart';
+import 'core/providers/workout_provider.dart';
 
 void main() {
   runApp(const WorkoutApp());
@@ -21,7 +24,7 @@ class WorkoutApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider(create: (_) => Object()), 
+        ChangeNotifierProvider(create: (_) => WorkoutProvider()),
       ],
       child: const AppContent(),
     );
@@ -90,6 +93,16 @@ final GoRouter _router = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: '/workout/new',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => const WorkoutScreen(),
+    ),
+    GoRoute(
+      path: '/exercises',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => const ExercisesScreen(),
     ),
   ],
 );
